@@ -4,20 +4,21 @@
  */
 
 import React, { useState } from "react";
-import { Team, PredictionResult, ScorePrediction } from "../types";
-import { WORLD_CUP_TEAMS } from "../data/teams";
-import { ShieldAlert, TrendingUp, Info, HelpCircle, Activity } from "lucide-react";
+import { Team, PredictionResult } from "../types";
+import { findTeam } from "../data/teamsRegistry";
+import { ShieldAlert, TrendingUp, Info, Activity, BrainCircuit, Database } from "lucide-react";
 
 interface DashboardProps {
+  teams: Team[];
   homeTeamId: string;
   awayTeamId: string;
   result: PredictionResult;
   isPredicting: boolean;
 }
 
-export function Dashboard({ homeTeamId, awayTeamId, result, isPredicting }: DashboardProps) {
-  const homeTeam = WORLD_CUP_TEAMS.find((t) => t.id === homeTeamId) || WORLD_CUP_TEAMS[0];
-  const awayTeam = WORLD_CUP_TEAMS.find((t) => t.id === awayTeamId) || WORLD_CUP_TEAMS[1];
+export function Dashboard({ teams, homeTeamId, awayTeamId, result, isPredicting }: DashboardProps) {
+  const homeTeam = findTeam(teams, homeTeamId);
+  const awayTeam = findTeam(teams, awayTeamId);
 
   // Hover state for the 6x6 heatmap cells
   const [hoveredCell, setHoveredCell] = useState<{ h: number; a: number; prob: number } | null>(null);
@@ -52,8 +53,48 @@ export function Dashboard({ homeTeamId, awayTeamId, result, isPredicting }: Dash
     };
   };
 
+  // Format relative time for data freshness display.
+  const formatFreshness = (iso: string | null): string => {
+    if (!iso) return "本地计算";
+    try {
+      const d = new Date(iso);
+      const diffMs = Date.now() - d.getTime();
+      const diffH = Math.floor(diffMs / 3600000);
+      const diffM = Math.floor((diffMs % 3600000) / 60000);
+      if (diffH > 0) return `${diffH}h ${diffM}m ago`;
+      return `${diffM}m ago`;
+    } catch {
+      return iso;
+    }
+  };
+
   return (
     <div className="space-y-6 text-gray-100 flex flex-col h-full">
+
+      {/* Backend data / DeepSeek status bar */}
+      {(result.eloSource || result.deepseekModifier != null) && (
+        <div className="flex flex-wrap items-center gap-3 text-[10px] font-mono">
+          {result.eloSource && (
+            <div className="flex items-center gap-1.5 bg-[#161a23] border border-[#232a3b] rounded-lg px-2.5 py-1">
+              <Database className="w-3 h-3 text-[#00E5FF]" />
+              <span className="text-gray-400">DATA:</span>
+              <span className="text-[#00E5FF] uppercase">{result.eloSource.replace(/_/g, " ")}</span>
+              <span className="text-gray-600">·</span>
+              <span className="text-gray-500">REFRESHED {formatFreshness(result.dataFreshnessAt)}</span>
+            </div>
+          )}
+          {result.deepseekModifier != null && (
+            <div className="flex items-center gap-1.5 bg-[#0d1a2a] border border-[#00E5FF]/30 rounded-lg px-2.5 py-1">
+              <BrainCircuit className="w-3 h-3 text-[#00E5FF]" />
+              <span className="text-gray-400">AI MODIFIER:</span>
+              <span className={`font-bold ${result.deepseekModifier >= 0 ? "text-[#00FF87]" : "text-[#FF4A6B]"}`}>
+                {result.deepseekModifier >= 0 ? "+" : ""}{(result.deepseekModifier).toFixed(4)}
+              </span>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* ⚠️ Extreme Alert Banner */}
       {result.alertTriggered && (
         <div

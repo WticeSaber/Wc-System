@@ -5,17 +5,18 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Team, MatchParams } from "../types";
-import { WORLD_CUP_TEAMS } from "../data/teams";
-import { Search, ChevronDown, Sliders, Play, RotateCcw, HelpCircle, ShieldAlert } from "lucide-react";
+import { findTeam } from "../data/teamsRegistry";
+import { Search, ChevronDown, Sliders, Play, RotateCcw, HelpCircle, BrainCircuit } from "lucide-react";
 
 interface SidebarProps {
+  teams: Team[];
   params: MatchParams;
   onChange: (newParams: MatchParams) => void;
   onRunPredict: () => void;
   isPredicting: boolean;
 }
 
-export function Sidebar({ params, onChange, onRunPredict, isPredicting }: SidebarProps) {
+export function Sidebar({ teams, params, onChange, onRunPredict, isPredicting }: SidebarProps) {
   // Dropdown states
   const [homeSearch, setHomeSearch] = useState("");
   const [awaySearch, setAwaySearch] = useState("");
@@ -40,11 +41,10 @@ export function Sidebar({ params, onChange, onRunPredict, isPredicting }: Sideba
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const homeTeam = WORLD_CUP_TEAMS.find((t) => t.id === params.homeTeamId) || WORLD_CUP_TEAMS[0];
-  const awayTeam = WORLD_CUP_TEAMS.find((t) => t.id === params.awayTeamId) || WORLD_CUP_TEAMS[1];
+  const homeTeam = findTeam(teams, params.homeTeamId);
+  const awayTeam = findTeam(teams, params.awayTeamId);
 
-  // Filters for lists
-  const filteredHomeTeams = WORLD_CUP_TEAMS.filter(
+  const filteredHomeTeams = teams.filter(
     (t) =>
       t.id !== params.awayTeamId &&
       (t.name.toLowerCase().includes(homeSearch.toLowerCase()) ||
@@ -52,7 +52,7 @@ export function Sidebar({ params, onChange, onRunPredict, isPredicting }: Sideba
         t.id.toLowerCase().includes(homeSearch.toLowerCase()))
   );
 
-  const filteredAwayTeams = WORLD_CUP_TEAMS.filter(
+  const filteredAwayTeams = teams.filter(
     (t) =>
       t.id !== params.homeTeamId &&
       (t.name.toLowerCase().includes(awaySearch.toLowerCase()) ||
@@ -126,7 +126,7 @@ export function Sidebar({ params, onChange, onRunPredict, isPredicting }: Sideba
                   <div className="text-sm font-bold text-white leading-tight flex items-center">
                     {homeTeam.name}
                     <span className="ml-1.5 text-[10px] font-mono text-gray-400 font-normal uppercase bg-[#161a23] px-1.5 py-0.5 rounded border border-[#252f44]">
-                      {homeTeam.id}
+                      {homeTeam.id}{homeTeam.group ? ` · ${homeTeam.group}` : ""}
                     </span>
                   </div>
                   <div className="text-[11px] text-gray-400 font-mono mt-0.5">
@@ -217,7 +217,7 @@ export function Sidebar({ params, onChange, onRunPredict, isPredicting }: Sideba
                   <div className="text-sm font-bold text-white leading-tight flex items-center">
                     {awayTeam.name}
                     <span className="ml-1.5 text-[10px] font-mono text-gray-400 font-normal uppercase bg-[#161a23] px-1.5 py-0.5 rounded border border-[#252f44]">
-                      {awayTeam.id}
+                      {awayTeam.id}{awayTeam.group ? ` · ${awayTeam.group}` : ""}
                     </span>
                   </div>
                   <div className="text-[11px] text-gray-400 font-mono mt-0.5">
@@ -429,6 +429,45 @@ export function Sidebar({ params, onChange, onRunPredict, isPredicting }: Sideba
                   <RotateCcw className="w-3 h-3" />
                   <span>复位所有变数 (Reset Modifiers)</span>
                 </button>
+
+                {/* DeepSeek AI Semantic Modifier Toggle */}
+                <div className="pt-2 border-t border-[#232a3b]/60">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <BrainCircuit className="w-3.5 h-3.5 text-[#00E5FF]" />
+                      <span className="text-[11px] font-semibold text-gray-300 font-sans">
+                        DeepSeek AI 情报修正
+                      </span>
+                      <span className="group relative cursor-pointer">
+                        <HelpCircle className="w-3 h-3 text-gray-500 hover:text-gray-300" />
+                        <span className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-52 bg-[#0b111e] text-[10px] text-gray-300 p-2 rounded-lg border border-[#2c374e] opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50 text-center leading-normal">
+                          调用 DeepSeek 分析近期比赛状态，生成 [-0.2, +0.2] 范围内的情报修正系数叠加至期望进球计算。需配置 DEEPSEEK_API_KEY。
+                        </span>
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      id="deepseek-toggle"
+                      onClick={() => onChange({ ...params, useDeepSeek: !params.useDeepSeek })}
+                      className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-200 cursor-pointer focus:outline-none ${
+                        params.useDeepSeek ? "bg-[#00E5FF]" : "bg-[#2d3a56]"
+                      }`}
+                      role="switch"
+                      aria-checked={params.useDeepSeek}
+                    >
+                      <span
+                        className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow transition-transform duration-200 ${
+                          params.useDeepSeek ? "translate-x-4" : "translate-x-0.5"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                  {params.useDeepSeek && (
+                    <p className="text-[9px] text-[#00E5FF] font-mono mt-1.5 leading-tight">
+                      AI 修正已启用 — 点击「运行矩阵运算」时将调用 DeepSeek API
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           </div>

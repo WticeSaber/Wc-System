@@ -1,0 +1,12 @@
+2026/06/23 20:57:19 [serve] initializing data store (source=mock)...
+2026/06/23 20:57:19 [cache] refresh complete: 24 teams loaded
+2026/06/23 20:57:19 [serve] DEEPSEEK_API_KEY not set; semantic layer disabled
+2026/06/23 20:57:19 [server] listening on 0.0.0.0:8080
+2026/06/23 20:57:23 [server] GET /api/health 200 0s
+2026/06/23 21:06:37 [server] GET /api/health 200 0s
+2026/06/23 21:06:37 [server] GET /api/teams 200 743.3µs
+2026/06/23 21:06:38 [server] POST /api/predict 200 510.8µs
+2026/06/23 21:06:49 [server] calculate error: modifier must be between -0.5 and +0.5: home=0.80 away=0.00
+2026/06/23 21:06:49 [server] POST /api/predict 500 36.7073ms
+2026/06/23 21:08:00 [server] calculate error: modifier must be between -0.5 and +0.5: home=0.80 away=0.00
+2026/06/23 21:08:00 [server] POST /api/predict 500 35.1437ms

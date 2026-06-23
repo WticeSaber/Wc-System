@@ -1,0 +1,6 @@
+# FM CSV exports and other user data files are not tracked in git.
+# Place your Football Manager squad export CSV here and set FM_CSV_PATH=./data/fm_export.csv
+*
+!.gitignore
+!README.md
+!wc2026_teams.json

@@ -1,0 +1,743 @@
+{
+  "version": "2026.1",
+  "tournament": "2026 FIFA World Cup",
+  "updated_at": "2026-06-23",
+  "notes": "维护说明见 data/README.md。修改后重启 Go 后端；前端 dev 模式会自动热更新。",
+  "teams": [
+    {
+      "id": "MEX",
+      "name_en": "Mexico",
+      "name_cn": "墨西哥",
+      "flag_code": "mx",
+      "iso2": "mx",
+      "canonical_name": "Mexico",
+      "csv_aliases": [
+        "Mexico"
+      ],
+      "group": "A",
+      "is_host": true,
+      "wiki_title": "Mexico_national_football_team",
+      "elo_code": "MX"
+    },
+    {
+      "id": "RSA",
+      "name_en": "South Africa",
+      "name_cn": "南非",
+      "flag_code": "za",
+      "iso2": "za",
+      "canonical_name": "South Africa",
+      "csv_aliases": [
+        "South Africa"
+      ],
+      "group": "A",
+      "is_host": false,
+      "wiki_title": "South_Africa_national_soccer_team",
+      "elo_code": "ZA"
+    },
+    {
+      "id": "KOR",
+      "name_en": "South Korea",
+      "name_cn": "韩国",
+      "flag_code": "kr",
+      "iso2": "kr",
+      "canonical_name": "South Korea",
+      "csv_aliases": [
+        "South Korea",
+        "Korea Republic",
+        "Korea Republic South"
+      ],
+      "group": "A",
+      "is_host": false,
+      "wiki_title": "South_Korea_national_football_team",
+      "elo_code": "KR"
+    },
+    {
+      "id": "CZE",
+      "name_en": "Czech Republic",
+      "name_cn": "捷克",
+      "flag_code": "cz",
+      "iso2": "cz",
+      "canonical_name": "Czech Republic",
+      "csv_aliases": [
+        "Czech Republic",
+        "Czechia"
+      ],
+      "group": "A",
+      "is_host": false,
+      "wiki_title": "Czech_Republic_national_football_team",
+      "elo_code": "CZ"
+    },
+    {
+      "id": "CAN",
+      "name_en": "Canada",
+      "name_cn": "加拿大",
+      "flag_code": "ca",
+      "iso2": "ca",
+      "canonical_name": "Canada",
+      "csv_aliases": [
+        "Canada"
+      ],
+      "group": "B",
+      "is_host": true,
+      "wiki_title": "Canada_men%27s_national_soccer_team",
+      "elo_code": "CA"
+    },
+    {
+      "id": "BIH",
+      "name_en": "Bosnia and Herzegovina",
+      "name_cn": "波黑",
+      "flag_code": "ba",
+      "iso2": "ba",
+      "canonical_name": "Bosnia and Herzegovina",
+      "csv_aliases": [
+        "Bosnia and Herzegovina",
+        "Bosnia-Herzegovina"
+      ],
+      "group": "B",
+      "is_host": false,
+      "wiki_title": "Bosnia_and_Herzegovina_national_football_team",
+      "elo_code": "BA"
+    },
+    {
+      "id": "QAT",
+      "name_en": "Qatar",
+      "name_cn": "卡塔尔",
+      "flag_code": "qa",
+      "iso2": "qa",
+      "canonical_name": "Qatar",
+      "csv_aliases": [
+        "Qatar"
+      ],
+      "group": "B",
+      "is_host": false,
+      "wiki_title": "Qatar_national_football_team",
+      "elo_code": "QA"
+    },
+    {
+      "id": "SUI",
+      "name_en": "Switzerland",
+      "name_cn": "瑞士",
+      "flag_code": "ch",
+      "iso2": "ch",
+      "canonical_name": "Switzerland",
+      "csv_aliases": [
+        "Switzerland"
+      ],
+      "group": "B",
+      "is_host": false,
+      "wiki_title": "Switzerland_national_football_team",
+      "elo_code": "CH"
+    },
+    {
+      "id": "BRA",
+      "name_en": "Brazil",
+      "name_cn": "巴西",
+      "flag_code": "br",
+      "iso2": "br",
+      "canonical_name": "Brazil",
+      "csv_aliases": [
+        "Brazil"
+      ],
+      "group": "C",
+      "is_host": false,
+      "wiki_title": "Brazil_national_football_team",
+      "elo_code": "BR"
+    },
+    {
+      "id": "MAR",
+      "name_en": "Morocco",
+      "name_cn": "摩洛哥",
+      "flag_code": "ma",
+      "iso2": "ma",
+      "canonical_name": "Morocco",
+      "csv_aliases": [
+        "Morocco"
+      ],
+      "group": "C",
+      "is_host": false,
+      "wiki_title": "Morocco_national_football_team",
+      "elo_code": "MA"
+    },
+    {
+      "id": "HAI",
+      "name_en": "Haiti",
+      "name_cn": "海地",
+      "flag_code": "ht",
+      "iso2": "ht",
+      "canonical_name": "Haiti",
+      "csv_aliases": [
+        "Haiti"
+      ],
+      "group": "C",
+      "is_host": false,
+      "wiki_title": "Haiti_national_football_team",
+      "elo_code": "HT"
+    },
+    {
+      "id": "SCO",
+      "name_en": "Scotland",
+      "name_cn": "苏格兰",
+      "flag_code": "gb-sct",
+      "iso2": "gb",
+      "canonical_name": "Scotland",
+      "csv_aliases": [
+        "Scotland"
+      ],
+      "group": "C",
+      "is_host": false,
+      "wiki_title": "Scotland_national_football_team",
+      "elo_code": "SQ"
+    },
+    {
+      "id": "USA",
+      "name_en": "USA",
+      "name_cn": "美国",
+      "flag_code": "us",
+      "iso2": "us",
+      "canonical_name": "USA",
+      "csv_aliases": [
+        "USA",
+        "United States"
+      ],
+      "group": "D",
+      "is_host": true,
+      "wiki_title": "United_States_men%27s_national_soccer_team",
+      "elo_code": "US"
+    },
+    {
+      "id": "PAR",
+      "name_en": "Paraguay",
+      "name_cn": "巴拉圭",
+      "flag_code": "py",
+      "iso2": "py",
+      "canonical_name": "Paraguay",
+      "csv_aliases": [
+        "Paraguay"
+      ],
+      "group": "D",
+      "is_host": false,
+      "wiki_title": "Paraguay_national_football_team",
+      "elo_code": "PY"
+    },
+    {
+      "id": "AUS",
+      "name_en": "Australia",
+      "name_cn": "澳大利亚",
+      "flag_code": "au",
+      "iso2": "au",
+      "canonical_name": "Australia",
+      "csv_aliases": [
+        "Australia"
+      ],
+      "group": "D",
+      "is_host": false,
+      "wiki_title": "Australia_national_soccer_team",
+      "elo_code": "AU"
+    },
+    {
+      "id": "TUR",
+      "name_en": "Turkey",
+      "name_cn": "土耳其",
+      "flag_code": "tr",
+      "iso2": "tr",
+      "canonical_name": "Turkey",
+      "csv_aliases": [
+        "Turkey",
+        "Türkiye",
+        "Turkiye"
+      ],
+      "group": "D",
+      "is_host": false,
+      "wiki_title": "Turkey_national_football_team",
+      "elo_code": "TR"
+    },
+    {
+      "id": "GER",
+      "name_en": "Germany",
+      "name_cn": "德国",
+      "flag_code": "de",
+      "iso2": "de",
+      "canonical_name": "Germany",
+      "csv_aliases": [
+        "Germany"
+      ],
+      "group": "E",
+      "is_host": false,
+      "wiki_title": "Germany_national_football_team",
+      "elo_code": "DE"
+    },
+    {
+      "id": "CUW",
+      "name_en": "Curaçao",
+      "name_cn": "库拉索",
+      "flag_code": "cw",
+      "iso2": "cw",
+      "canonical_name": "Curaçao",
+      "csv_aliases": [
+        "Curaçao",
+        "Curacao"
+      ],
+      "group": "E",
+      "is_host": false,
+      "wiki_title": "Cura%C3%A7ao_national_football_team",
+      "elo_code": "CW"
+    },
+    {
+      "id": "CIV",
+      "name_en": "Ivory Coast",
+      "name_cn": "科特迪瓦",
+      "flag_code": "ci",
+      "iso2": "ci",
+      "canonical_name": "Ivory Coast",
+      "csv_aliases": [
+        "Ivory Coast",
+        "Côte d'Ivoire",
+        "Cote d'Ivoire"
+      ],
+      "group": "E",
+      "is_host": false,
+      "wiki_title": "Ivory_Coast_national_football_team",
+      "elo_code": "CI"
+    },
+    {
+      "id": "ECU",
+      "name_en": "Ecuador",
+      "name_cn": "厄瓜多尔",
+      "flag_code": "ec",
+      "iso2": "ec",
+      "canonical_name": "Ecuador",
+      "csv_aliases": [
+        "Ecuador"
+      ],
+      "group": "E",
+      "is_host": false,
+      "wiki_title": "Ecuador_national_football_team",
+      "elo_code": "EC"
+    },
+    {
+      "id": "NED",
+      "name_en": "Netherlands",
+      "name_cn": "荷兰",
+      "flag_code": "nl",
+      "iso2": "nl",
+      "canonical_name": "Netherlands",
+      "csv_aliases": [
+        "Netherlands"
+      ],
+      "group": "F",
+      "is_host": false,
+      "wiki_title": "Netherlands_national_football_team",
+      "elo_code": "NL"
+    },
+    {
+      "id": "JPN",
+      "name_en": "Japan",
+      "name_cn": "日本",
+      "flag_code": "jp",
+      "iso2": "jp",
+      "canonical_name": "Japan",
+      "csv_aliases": [
+        "Japan"
+      ],
+      "group": "F",
+      "is_host": false,
+      "wiki_title": "Japan_national_football_team",
+      "elo_code": "JP"
+    },
+    {
+      "id": "SWE",
+      "name_en": "Sweden",
+      "name_cn": "瑞典",
+      "flag_code": "se",
+      "iso2": "se",
+      "canonical_name": "Sweden",
+      "csv_aliases": [
+        "Sweden"
+      ],
+      "group": "F",
+      "is_host": false,
+      "wiki_title": "Sweden_men%27s_national_football_team",
+      "elo_code": "SE"
+    },
+    {
+      "id": "TUN",
+      "name_en": "Tunisia",
+      "name_cn": "突尼斯",
+      "flag_code": "tn",
+      "iso2": "tn",
+      "canonical_name": "Tunisia",
+      "csv_aliases": [
+        "Tunisia"
+      ],
+      "group": "F",
+      "is_host": false,
+      "wiki_title": "Tunisia_national_football_team",
+      "elo_code": "TN"
+    },
+    {
+      "id": "BEL",
+      "name_en": "Belgium",
+      "name_cn": "比利时",
+      "flag_code": "be",
+      "iso2": "be",
+      "canonical_name": "Belgium",
+      "csv_aliases": [
+        "Belgium"
+      ],
+      "group": "G",
+      "is_host": false,
+      "wiki_title": "Belgium_national_football_team",
+      "elo_code": "BE"
+    },
+    {
+      "id": "EGY",
+      "name_en": "Egypt",
+      "name_cn": "埃及",
+      "flag_code": "eg",
+      "iso2": "eg",
+      "canonical_name": "Egypt",
+      "csv_aliases": [
+        "Egypt"
+      ],
+      "group": "G",
+      "is_host": false,
+      "wiki_title": "Egypt_national_football_team",
+      "elo_code": "EG"
+    },
+    {
+      "id": "IRN",
+      "name_en": "Iran",
+      "name_cn": "伊朗",
+      "flag_code": "ir",
+      "iso2": "ir",
+      "canonical_name": "Iran",
+      "csv_aliases": [
+        "Iran",
+        "IR Iran"
+      ],
+      "group": "G",
+      "is_host": false,
+      "wiki_title": "Iran_national_football_team",
+      "elo_code": "IR"
+    },
+    {
+      "id": "NZL",
+      "name_en": "New Zealand",
+      "name_cn": "新西兰",
+      "flag_code": "nz",
+      "iso2": "nz",
+      "canonical_name": "New Zealand",
+      "csv_aliases": [
+        "New Zealand"
+      ],
+      "group": "G",
+      "is_host": false,
+      "wiki_title": "New_Zealand_men%27s_national_football_team",
+      "elo_code": "NZ"
+    },
+    {
+      "id": "ESP",
+      "name_en": "Spain",
+      "name_cn": "西班牙",
+      "flag_code": "es",
+      "iso2": "es",
+      "canonical_name": "Spain",
+      "csv_aliases": [
+        "Spain"
+      ],
+      "group": "H",
+      "is_host": false,
+      "wiki_title": "Spain_national_football_team",
+      "elo_code": "ES"
+    },
+    {
+      "id": "CPV",
+      "name_en": "Cape Verde",
+      "name_cn": "佛得角",
+      "flag_code": "cv",
+      "iso2": "cv",
+      "canonical_name": "Cape Verde",
+      "csv_aliases": [
+        "Cape Verde",
+        "Cabo Verde"
+      ],
+      "group": "H",
+      "is_host": false,
+      "wiki_title": "Cape_Verde_national_football_team",
+      "elo_code": "CV"
+    },
+    {
+      "id": "KSA",
+      "name_en": "Saudi Arabia",
+      "name_cn": "沙特阿拉伯",
+      "flag_code": "sa",
+      "iso2": "sa",
+      "canonical_name": "Saudi Arabia",
+      "csv_aliases": [
+        "Saudi Arabia"
+      ],
+      "group": "H",
+      "is_host": false,
+      "wiki_title": "Saudi_Arabia_national_football_team",
+      "elo_code": "SA"
+    },
+    {
+      "id": "URU",
+      "name_en": "Uruguay",
+      "name_cn": "乌拉圭",
+      "flag_code": "uy",
+      "iso2": "uy",
+      "canonical_name": "Uruguay",
+      "csv_aliases": [
+        "Uruguay"
+      ],
+      "group": "H",
+      "is_host": false,
+      "wiki_title": "Uruguay_national_football_team",
+      "elo_code": "UY"
+    },
+    {
+      "id": "FRA",
+      "name_en": "France",
+      "name_cn": "法国",
+      "flag_code": "fr",
+      "iso2": "fr",
+      "canonical_name": "France",
+      "csv_aliases": [
+        "France"
+      ],
+      "group": "I",
+      "is_host": false,
+      "wiki_title": "France_national_football_team",
+      "elo_code": "FR"
+    },
+    {
+      "id": "SEN",
+      "name_en": "Senegal",
+      "name_cn": "塞内加尔",
+      "flag_code": "sn",
+      "iso2": "sn",
+      "canonical_name": "Senegal",
+      "csv_aliases": [
+        "Senegal"
+      ],
+      "group": "I",
+      "is_host": false,
+      "wiki_title": "Senegal_national_football_team",
+      "elo_code": "SN"
+    },
+    {
+      "id": "IRQ",
+      "name_en": "Iraq",
+      "name_cn": "伊拉克",
+      "flag_code": "iq",
+      "iso2": "iq",
+      "canonical_name": "Iraq",
+      "csv_aliases": [
+        "Iraq"
+      ],
+      "group": "I",
+      "is_host": false,
+      "wiki_title": "Iraq_national_football_team",
+      "elo_code": "IQ"
+    },
+    {
+      "id": "NOR",
+      "name_en": "Norway",
+      "name_cn": "挪威",
+      "flag_code": "no",
+      "iso2": "no",
+      "canonical_name": "Norway",
+      "csv_aliases": [
+        "Norway"
+      ],
+      "group": "I",
+      "is_host": false,
+      "wiki_title": "Norway_national_football_team",
+      "elo_code": "NO"
+    },
+    {
+      "id": "ARG",
+      "name_en": "Argentina",
+      "name_cn": "阿根廷",
+      "flag_code": "ar",
+      "iso2": "ar",
+      "canonical_name": "Argentina",
+      "csv_aliases": [
+        "Argentina"
+      ],
+      "group": "J",
+      "is_host": false,
+      "wiki_title": "Argentina_national_football_team",
+      "elo_code": "AR"
+    },
+    {
+      "id": "ALG",
+      "name_en": "Algeria",
+      "name_cn": "阿尔及利亚",
+      "flag_code": "dz",
+      "iso2": "dz",
+      "canonical_name": "Algeria",
+      "csv_aliases": [
+        "Algeria"
+      ],
+      "group": "J",
+      "is_host": false,
+      "wiki_title": "Algeria_national_football_team",
+      "elo_code": "DZ"
+    },
+    {
+      "id": "AUT",
+      "name_en": "Austria",
+      "name_cn": "奥地利",
+      "flag_code": "at",
+      "iso2": "at",
+      "canonical_name": "Austria",
+      "csv_aliases": [
+        "Austria"
+      ],
+      "group": "J",
+      "is_host": false,
+      "wiki_title": "Austria_national_football_team",
+      "elo_code": "AT"
+    },
+    {
+      "id": "JOR",
+      "name_en": "Jordan",
+      "name_cn": "约旦",
+      "flag_code": "jo",
+      "iso2": "jo",
+      "canonical_name": "Jordan",
+      "csv_aliases": [
+        "Jordan"
+      ],
+      "group": "J",
+      "is_host": false,
+      "wiki_title": "Jordan_national_football_team",
+      "elo_code": "JO"
+    },
+    {
+      "id": "POR",
+      "name_en": "Portugal",
+      "name_cn": "葡萄牙",
+      "flag_code": "pt",
+      "iso2": "pt",
+      "canonical_name": "Portugal",
+      "csv_aliases": [
+        "Portugal"
+      ],
+      "group": "K",
+      "is_host": false,
+      "wiki_title": "Portugal_national_football_team",
+      "elo_code": "PT"
+    },
+    {
+      "id": "COD",
+      "name_en": "DR Congo",
+      "name_cn": "刚果（金）",
+      "flag_code": "cd",
+      "iso2": "cd",
+      "canonical_name": "DR Congo",
+      "csv_aliases": [
+        "DR Congo",
+        "Congo DR",
+        "Democratic Republic of the Congo",
+        "Congo, Dem. Rep."
+      ],
+      "group": "K",
+      "is_host": false,
+      "wiki_title": "DR_Congo_national_football_team",
+      "elo_code": "CD"
+    },
+    {
+      "id": "UZB",
+      "name_en": "Uzbekistan",
+      "name_cn": "乌兹别克斯坦",
+      "flag_code": "uz",
+      "iso2": "uz",
+      "canonical_name": "Uzbekistan",
+      "csv_aliases": [
+        "Uzbekistan"
+      ],
+      "group": "K",
+      "is_host": false,
+      "wiki_title": "Uzbekistan_national_football_team",
+      "elo_code": "UZ"
+    },
+    {
+      "id": "COL",
+      "name_en": "Colombia",
+      "name_cn": "哥伦比亚",
+      "flag_code": "co",
+      "iso2": "co",
+      "canonical_name": "Colombia",
+      "csv_aliases": [
+        "Colombia"
+      ],
+      "group": "K",
+      "is_host": false,
+      "wiki_title": "Colombia_national_football_team",
+      "elo_code": "CO"
+    },
+    {
+      "id": "ENG",
+      "name_en": "England",
+      "name_cn": "英格兰",
+      "flag_code": "gb-eng",
+      "iso2": "gb",
+      "canonical_name": "England",
+      "csv_aliases": [
+        "England"
+      ],
+      "group": "L",
+      "is_host": false,
+      "wiki_title": "England_national_football_team",
+      "elo_code": "EN"
+    },
+    {
+      "id": "CRO",
+      "name_en": "Croatia",
+      "name_cn": "克罗地亚",
+      "flag_code": "hr",
+      "iso2": "hr",
+      "canonical_name": "Croatia",
+      "csv_aliases": [
+        "Croatia"
+      ],
+      "group": "L",
+      "is_host": false,
+      "wiki_title": "Croatia_national_football_team",
+      "elo_code": "HR"
+    },
+    {
+      "id": "GHA",
+      "name_en": "Ghana",
+      "name_cn": "加纳",
+      "flag_code": "gh",
+      "iso2": "gh",
+      "canonical_name": "Ghana",
+      "csv_aliases": [
+        "Ghana"
+      ],
+      "group": "L",
+      "is_host": false,
+      "wiki_title": "Ghana_national_football_team",
+      "elo_code": "GH"
+    },
+    {
+      "id": "PAN",
+      "name_en": "Panama",
+      "name_cn": "巴拿马",
+      "flag_code": "pa",
+      "iso2": "pa",
+      "canonical_name": "Panama",
+      "csv_aliases": [
+        "Panama"
+      ],
+      "group": "L",
+      "is_host": false,
+      "wiki_title": "Panama_national_football_team",
+      "elo_code": "PA"
+    }
+  ]
+}

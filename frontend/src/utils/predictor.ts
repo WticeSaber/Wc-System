@@ -4,7 +4,8 @@
  */
 
 import { Team, MatchParams, PredictionResult, ScorePrediction } from "../types";
-import { WORLD_CUP_TEAMS } from "../data/teams";
+import { findTeam } from "../data/teamsRegistry";
+import { WORLD_CUP_TEAMS } from "../data/teamsRegistry";
 
 // Standard factorial calculations
 function factorial(n: number): number {
@@ -22,9 +23,12 @@ export function poissonProbability(k: number, lambda: number): number {
   return (Math.pow(lambda, k) * Math.exp(-lambda)) / factorial(k);
 }
 
-export function runEloPoissonPrediction(params: MatchParams): PredictionResult {
-  const homeTeam = WORLD_CUP_TEAMS.find((t) => t.id === params.homeTeamId) || WORLD_CUP_TEAMS[0];
-  const awayTeam = WORLD_CUP_TEAMS.find((t) => t.id === params.awayTeamId) || WORLD_CUP_TEAMS[1];
+export function runEloPoissonPrediction(
+  params: MatchParams,
+  teams: Team[] = WORLD_CUP_TEAMS
+): PredictionResult {
+  const homeTeam = findTeam(teams, params.homeTeamId);
+  const awayTeam = findTeam(teams, params.awayTeamId);
 
   // Determine actual Elo ratings used
   const homeElo = typeof params.homeElo === "number" ? params.homeElo : homeTeam.defaultElo;
@@ -112,5 +116,9 @@ export function runEloPoissonPrediction(params: MatchParams): PredictionResult {
     topPredictions,
     alertTriggered,
     alertMessage,
+    // These fields are null when running the local fallback (no backend).
+    deepseekModifier: null,
+    eloSource: null,
+    dataFreshnessAt: null,
   };
 }
