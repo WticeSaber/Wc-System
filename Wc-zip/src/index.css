@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --animate-fadeIn: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Custom Scrollbar utility for teams selectors list */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 5px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #161d2b;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #2d3a56;
+  border-radius: 9999px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #00FF87;
+}

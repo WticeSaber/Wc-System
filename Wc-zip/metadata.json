@@ -1,0 +1,6 @@
+{
+  "name": "2026 World Cup Elo-Poisson Predictor",
+  "description": "2026世界杯比分预测引擎 - 基于Elo评级与泊松分布的专业级数据可视化分析看板",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
