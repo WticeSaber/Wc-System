@@ -1,0 +1,473 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Prediction Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=JetBrains+Mono:wght@500;800;900&amp;family=Space+Grotesk:wght@700;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#bdf4ff",
+                        "inverse-primary": "#006d36",
+                        "tertiary-container": "#ffd4d6",
+                        "on-tertiary-fixed": "#40000f",
+                        "on-primary": "#003919",
+                        "on-tertiary-fixed-variant": "#91002d",
+                        "background": "#0f131d",
+                        "on-secondary": "#00363d",
+                        "secondary-container": "#00e3fd",
+                        "on-primary-fixed": "#00210c",
+                        "surface-container-high": "#262a35",
+                        "surface-container": "#1c1f2a",
+                        "primary": "#f1ffef",
+                        "on-error": "#690005",
+                        "tertiary": "#fffaf9",
+                        "surface-dim": "#0f131d",
+                        "on-secondary-fixed-variant": "#004f58",
+                        "on-tertiary": "#67001d",
+                        "surface-tint": "#00e478",
+                        "tertiary-fixed": "#ffdadb",
+                        "surface-container-lowest": "#0a0e18",
+                        "surface-container-low": "#171b26",
+                        "on-background": "#dfe2f1",
+                        "on-secondary-container": "#00616d",
+                        "on-primary-container": "#007138",
+                        "surface-bright": "#353944",
+                        "inverse-on-surface": "#2c303b",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#00ff87",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#313540",
+                        "on-tertiary-container": "#c01542",
+                        "outline-variant": "#3b4b3d",
+                        "outline": "#849585",
+                        "on-surface-variant": "#b9cbb9",
+                        "primary-fixed-dim": "#00e478",
+                        "tertiary-fixed-dim": "#ffb2b8",
+                        "surface": "#0f131d",
+                        "secondary-fixed-dim": "#00daf3",
+                        "surface-variant": "#313540",
+                        "error": "#ffb4ab",
+                        "secondary-fixed": "#9cf0ff",
+                        "on-surface": "#dfe2f1",
+                        "on-secondary-fixed": "#001f24",
+                        "inverse-surface": "#dfe2f1",
+                        "on-primary-fixed-variant": "#005227",
+                        "primary-fixed": "#60ff98"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "padding-card": "20px",
+                        "gutter": "24px",
+                        "margin-page": "32px",
+                        "gap-compact": "12px"
+                    },
+                    "fontFamily": {
+                        "label-mono-mobile": ["JetBrains Mono"],
+                        "display-xl": ["Space Grotesk"],
+                        "stat-xl": ["JetBrains Mono"],
+                        "stat-lg": ["JetBrains Mono"],
+                        "body-bold": ["Inter"],
+                        "body-base": ["Inter"],
+                        "title-lg": ["Space Grotesk"],
+                        "label-mono": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "label-mono-mobile": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "display-xl": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "900" }],
+                        "stat-xl": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.03em", "fontWeight": "900" }],
+                        "stat-lg": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-bold": ["14px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "body-base": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "title-lg": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .neon-glow {
+            box-shadow: 0 0 15px rgba(0, 255, 135, 0.35);
+        }
+        .neon-border {
+            border-color: #00ff87;
+        }
+        .cyan-glow {
+            box-shadow: 0 0 15px rgba(0, 218, 243, 0.35);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-base">
+<!-- TopNavBar -->
+<nav class="bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center w-full px-gutter h-16 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container text-2xl">trophy</span>
+<div class="flex flex-col">
+<span class="font-display-xl text-display-xl font-black text-primary-container tracking-tighter">Obsidian Telemetry <span class="bg-primary-container text-on-primary-container text-xs px-2 py-0.5 rounded-full ml-2 align-middle">V2.4 PRO</span></span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">2026 World Cup Elo-Poisson Predictor</span>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant font-medium hover:text-primary-fixed hover:bg-surface-container-high transition-colors px-3 py-2 rounded-md" href="#">Data Sources</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-fixed hover:bg-surface-container-high transition-colors px-3 py-2 rounded-md" href="#">FIFA 2026</a>
+<a class="text-primary-fixed-dim border-b-2 border-primary-fixed-dim pb-1 px-3 py-2" href="#">Predictions</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-fixed hover:bg-surface-container-high transition-colors px-3 py-2 rounded-md" href="#">Market</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-fixed hover:bg-surface-container-high transition-colors px-3 py-2 rounded-md" href="#">API</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-fixed hover:bg-surface-container-high transition-colors px-3 py-2 rounded-md" href="#">Docs</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-surface-container-low px-4 py-1.5 rounded-full flex items-center gap-2 border border-outline-variant">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">Live Elo Data</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<img class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A small circular avatar placeholder showing a generic user silhouette in high contrast cyberpunk lighting, fitting the telemetry dashboard aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO1n-t5PX463Spk0LcAkZT1h7U9jo5ABT3EM37HVbqjOMuzM2XXNc7nLZIDegNN1VG8o98klxVlqMCNOS0DSrWEYmjN15uBh64k9NzLOAw8fIX9dEwCAwlii9iifuccVjsU1lXHNGe5LJ5Etpp-KUPXCp2nycDdn-K_7YxaIWkglszkVW9opUBEiRj0xkSP05v4yWAJW-GYFC1_s_U1rdWhtqEXoA1UGDMf1ThFkqc8LY4Kv0rgzX-uDHmgy6LqUGwn8qiI6YTKqmx">
+</div>
+</nav>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col bg-surface-container-low border-r border-outline-variant w-64 h-full py-margin-page gap-gap-compact shrink-0 overflow-y-auto">
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:bg-surface-container-highest hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined">terminal</span>
+<span class="font-label-mono text-label-mono">Control Console</span>
+</a>
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:bg-surface-container-highest hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-mono text-label-mono">Market Analysis</span>
+</a>
+<a class="bg-primary-container/10 text-primary-fixed border-l-4 border-primary-fixed px-4 py-3 flex items-center gap-3 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-mono text-label-mono">Elo Rankings</span>
+</a>
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:bg-surface-container-highest hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined">biotech</span>
+<span class="font-label-mono text-label-mono">Telemetry</span>
+</a>
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:bg-surface-container-highest hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-mono text-label-mono">History</span>
+</a>
+<div class="mt-auto px-4 flex flex-col gap-2">
+<button class="w-full py-2 bg-surface-variant text-on-surface rounded-md font-label-mono text-label-mono hover:bg-surface-bright transition-colors border border-outline-variant flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">download</span> Export Data
+                </button>
+</div>
+<div class="border-t border-outline-variant mt-4 pt-4 flex flex-col gap-1">
+<a class="text-on-surface-variant px-4 py-2 flex items-center gap-3 hover:bg-surface-container-highest hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined">tune</span>
+<span class="font-label-mono text-label-mono">Settings</span>
+</a>
+<a class="text-on-surface-variant px-4 py-2 flex items-center gap-3 hover:bg-surface-container-highest hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-mono text-label-mono">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 p-gutter overflow-y-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter max-w-7xl mx-auto">
+<!-- Left Column: Micro Control Console -->
+<div class="lg:col-span-3 flex flex-col gap-4">
+<div class="bg-surface-container border border-outline-variant rounded-xl p-padding-card flex flex-col h-full">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary-container text-3xl">sports_soccer</span>
+<div>
+<h2 class="font-title-lg text-title-lg text-on-surface">MICRO CONTROL CONSOLE</h2>
+<p class="text-on-surface-variant text-xs mt-1">Adjust core team ratings and micro-interventions to trigger real-time Poisson matrix computation.</p>
+</div>
+</div>
+<div class="flex flex-col gap-6 flex-1">
+<!-- Home Team Input -->
+<div>
+<label class="font-label-mono text-label-mono text-on-surface mb-2 block">HOME TEAM</label>
+<div class="bg-surface-dim border border-outline-variant rounded-lg p-3 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A circular flag icon depicting the flag of Argentina, stylized with a subtle glow for a dark high-tech telemetry UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuvnlYZ5otXa27xr1i-8Q6H-GFcCBqWunpJsbWFitskgqoM5HlAkqB8RMd9Uw2KHTTVrBhYhAH96lhUT_QpjELUeBPzimBAUYdV-pvN04jONdFg6YflfcrIGUuy679aSvBTdy_Tp3II05_fIBOlKHmRHHCqmnpNtq5bd8kp_w7BYrKcVChL4EoRV8TdE8hAeHik8K7Z5e1vRLXT864EM9CwOmOxg9gPc9kTT-JvnRdboBFTta5bcok2bUOUrnaf5oNq7SHBEh3763F">
+<div>
+<div class="font-body-bold text-body-bold flex items-center gap-2">Argentina <span class="bg-surface-bright text-on-surface-variant text-[10px] px-1.5 py-0.5 rounded">ARG</span></div>
+<div class="font-label-mono text-[10px] text-on-surface-variant mt-0.5">Base Elo: 2130</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Away Team Input -->
+<div>
+<label class="font-label-mono text-label-mono text-on-surface mb-2 block">AWAY TEAM</label>
+<div class="bg-surface-dim border border-outline-variant rounded-lg p-3 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A circular flag icon depicting the flag of France, stylized with a subtle glow for a dark high-tech telemetry UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnk7yuQiTG9TIgAre4cVVez0tvL71Pm9dTIHthjXcP412N-CyA4Rn17WucxZmICKQZ4eeCs-Etm0-P4IBKw8OxDJ81b5fxnK1iUFkn86AZyg0_JAZVPjHhnKrbrkCpqoNDKyoLLFFASSsAlyTIuL_P1Thjr3IOTwpuG1coZjXzn12HzESy80n1SL2GhxlPG2Oh5CeZYi7joxKSEGm00VpJ4M3vlNg6aa_KiHQNsyye9r_vhzotUf7YD4RC10L9XrHRgEGeXwJWZUmC">
+<div>
+<div class="font-body-bold text-body-bold flex items-center gap-2">France <span class="bg-surface-bright text-on-surface-variant text-[10px] px-1.5 py-0.5 rounded">FRA</span></div>
+<div class="font-label-mono text-[10px] text-on-surface-variant mt-0.5">Base Elo: 2110</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Avg Goals Input -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<label class="font-label-mono text-label-mono text-on-surface flex items-center gap-1">AVG GOALS <span class="material-symbols-outlined text-[14px] text-on-surface-variant cursor-help">help</span></label>
+<span class="text-secondary-fixed-dim font-stat-lg text-sm">2.5</span>
+</div>
+<div class="bg-surface-dim border border-outline-variant rounded-lg p-3 flex items-center justify-between">
+<span class="font-stat-lg text-stat-lg text-on-surface">2.5</span>
+</div>
+</div>
+<!-- Advanced Config Toggle -->
+<button class="w-full flex items-center justify-between p-3 bg-surface-container-highest border border-outline-variant rounded-lg mt-auto hover:bg-surface-bright transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed-dim">tune</span>
+<span class="font-label-mono text-label-mono text-on-surface">ADVANCED CONFIG</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">expand_more</span>
+</button>
+</div>
+<button class="w-full mt-6 bg-primary-container text-[#000000] font-body-bold text-body-bold py-3 rounded-lg flex items-center justify-center gap-2 neon-glow hover:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined">play_arrow</span> RUN PREDICTION
+                        </button>
+</div>
+</div>
+<!-- Right Column: Visualization Canvas -->
+<div class="lg:col-span-9 flex flex-col gap-gutter">
+<!-- Top Row: Macro & Expectancy -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Macro Distribution -->
+<div class="bg-surface-container border border-outline-variant rounded-xl p-padding-card">
+<h3 class="font-label-mono text-label-mono text-on-surface-variant flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-secondary-fixed-dim text-[16px]">show_chart</span> MACRO DISTRIBUTION
+                            </h3>
+<div class="flex flex-col items-center justify-center py-4">
+<!-- Placeholder for Arch Gauge -->
+<div class="relative w-48 h-24 overflow-hidden mb-6 flex justify-center">
+<!-- Semi-circle mock -->
+<div class="w-48 h-48 rounded-full border-[16px] border-surface-bright absolute top-0"></div>
+<div class="w-48 h-48 rounded-full border-[16px] border-primary-container absolute top-0" style="clip-path: polygon(0 0, 50% 0, 50% 50%, 0 50%); transform: rotate(45deg);"></div>
+<div class="w-48 h-48 rounded-full border-[16px] border-secondary-fixed-dim absolute top-0" style="clip-path: polygon(50% 0, 100% 0, 100% 50%, 50% 50%); transform: rotate(-20deg);"></div>
+<div class="w-48 h-48 rounded-full border-[16px] border-error absolute top-0" style="clip-path: polygon(100% 0, 100% 50%, 50% 50%, 50% 0); transform: rotate(20deg);"></div>
+<div class="absolute bottom-0 flex flex-col items-center">
+<span class="font-label-mono text-[10px] text-on-surface-variant">EXPECTED GOALS (xG)</span>
+<div class="font-stat-xl text-stat-xl text-on-surface mt-1">1.32 : 1.18</div>
+<div class="flex items-center gap-2 mt-1 text-[10px] text-on-surface-variant">
+<img class="w-3 h-3 rounded-full object-cover" data-alt="Tiny Argentina flag icon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwJhQ-h4w1dzmod1SUYSg_hUSeZfPEJZ1dAbPMFUzuzBNi-J-eFgUqhzdH6tqOnBAW1DqK2izM1Xv3twZpKlSe8V2UqOunLD-bhxQRnPdmlTQ0nH4DMwAts-EVgzS7Twq7dtbVK0PgsoRAxvKinWlH216Jh4JVDxa4zEYSJmhCNjP5GdF0zS0hR2OBYbQCjqVENBk6MixaAoupvdYanmb6LtW9PvawUUtFC1_nN3aILi3PMuP87dK0st-jojkMmwvyIOozcNejh1Q4"> ARG vs FRA <img class="w-3 h-3 rounded-full object-cover" data-alt="Tiny France flag icon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQa6bRJo-Xzi8rmILoRPcGNgcKuyDK6IUMFgjCbM4b9JmsZsNbYlWT9hrCUktYFZRZI3pEIa1z9WYoufaoBB94TQhv3Sx0WGiCOQDVmuBI9o95vqLEHAZAbCDu1m7if3_ZdAoSM5gy6WNCPmwGV40ohIfc7tEVug07xXsJYkiX_cpbdWHQjtPgCE6z0WI5GJaz_CQRe7tbvFjtE-sy_ibui05gwN5GAt7yAfXjvQ5AjVKEmcYoXt719q0nmmuY3Wu3jV85pKXyqHHH">
+</div>
+</div>
+</div>
+<div class="w-full flex flex-col gap-3 mt-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-body-base text-on-surface">Home Win</span>
+</div>
+<span class="font-stat-lg text-primary-container text-lg">40.8%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span>
+<span class="font-body-base text-on-surface">Draw</span>
+</div>
+<span class="font-stat-lg text-secondary-fixed-dim text-lg">26.9%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-body-base text-on-surface">Away Win</span>
+</div>
+<span class="font-stat-lg text-error text-lg">33.1%</span>
+</div>
+</div>
+<div class="w-full mt-6 pt-4 border-t border-outline-variant">
+<div class="flex justify-between font-label-mono text-[10px] text-on-surface-variant mb-1">
+<span>PROBABILITY TREND</span>
+<span>SUM: 100%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-bright flex overflow-hidden">
+<div class="h-full bg-primary-container" style="width: 40.8%"></div>
+<div class="h-full bg-secondary-fixed-dim" style="width: 26.9%"></div>
+<div class="h-full bg-error" style="width: 33.1%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Scoreboard Expectancy -->
+<div class="bg-surface-container border border-outline-variant rounded-xl p-padding-card flex flex-col">
+<h3 class="font-label-mono text-label-mono text-on-surface-variant flex items-center gap-2 mb-8">
+<span class="material-symbols-outlined text-primary-container text-[16px]">trending_up</span> SCOREBOARD EXPECTANCY
+                            </h3>
+<div class="flex justify-center items-end gap-4 h-48 mb-8">
+<!-- Rank 2 -->
+<div class="bg-surface-dim border border-outline-variant rounded-lg p-4 flex flex-col items-center justify-between h-36 w-28 relative">
+<div class="absolute -top-3 bg-secondary-fixed-dim text-[#000000] w-6 h-6 rounded-full flex items-center justify-center font-body-bold text-xs">2</div>
+<span class="font-label-mono text-[10px] text-on-surface-variant mt-2">Prediction 2</span>
+<span class="font-stat-xl text-stat-xl text-secondary-fixed-dim">1-0</span>
+<div class="bg-surface-bright px-2 py-1 rounded text-xs font-label-mono text-on-surface">10.82%</div>
+</div>
+<!-- Rank 1 (Podium Center) -->
+<div class="bg-surface-dim border-2 neon-border rounded-lg p-4 flex flex-col items-center justify-between h-48 w-32 relative neon-glow">
+<div class="absolute -top-4 bg-primary-container text-[#000000] w-8 h-8 rounded-full flex items-center justify-center font-body-bold text-sm">1</div>
+<span class="font-label-mono text-xs text-primary-container mt-3 font-bold">Top Prediction</span>
+<span class="font-stat-xl text-[40px] leading-none text-on-surface mt-2 font-black">1-1</span>
+<div class="bg-primary-container/20 border border-primary-container/50 px-3 py-1.5 rounded text-sm font-label-mono text-primary-container mt-auto">12.77%</div>
+</div>
+<!-- Rank 3 -->
+<div class="bg-surface-dim border border-outline-variant rounded-lg p-4 flex flex-col items-center justify-between h-32 w-28 relative">
+<div class="absolute -top-3 bg-error text-[#000000] w-6 h-6 rounded-full flex items-center justify-center font-body-bold text-xs">3</div>
+<span class="font-label-mono text-[10px] text-on-surface-variant mt-2">Prediction 3</span>
+<span class="font-stat-xl text-stat-xl text-error">0-1</span>
+<div class="bg-surface-bright px-2 py-1 rounded text-xs font-label-mono text-on-surface">9.65%</div>
+</div>
+</div>
+<div class="mt-auto bg-surface-dim border border-outline-variant rounded-lg p-3 flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary-fixed-dim text-[18px] mt-0.5">info</span>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                                    Calculations based on independent Poisson distribution joint computation. Based on latest win probability: <span class="text-primary-container font-bold">Argentina</span> has a <span class="text-primary-container font-bold">40.8%</span> chance to win. Most likely total goals is <span class="text-secondary-fixed-dim font-bold">2.50</span>.
+                                </p>
+</div>
+</div>
+</div>
+<!-- Bottom Row: Heatmap Matrix -->
+<div class="bg-surface-container border border-outline-variant rounded-xl p-padding-card">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="font-label-mono text-label-mono text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed-dim text-[16px]">grid_on</span> DEPTH PROBABILITY MATRIX (HEATMAP)
+                                </h3>
+<p class="text-xs text-on-surface-variant mt-1">Row represents Home goals (ARG), Col represents Away goals (FRA). Cell represents specific joint score probability.</p>
+</div>
+<div class="flex items-center gap-2 text-[10px] font-label-mono text-on-surface-variant">
+<span>Density: 0%</span>
+<div class="w-24 h-2 bg-gradient-to-r from-surface-dim to-primary-container rounded"></div>
+<span>Max (12.8%)</span>
+</div>
+</div>
+<div class="overflow-x-auto min-w-[480px]">
+<div class="grid grid-cols-[auto_1fr_1fr_1fr_1fr_1fr_1fr] gap-1">
+<!-- Header Row (Away Goals) -->
+<div class="col-start-2 col-span-6 text-center font-label-mono text-xs text-error mb-2">AWAY GOALS (0-5)</div>
+<div></div> <!-- Empty top-left -->
+<div class="text-center font-label-mono text-on-surface-variant pb-2">0</div>
+<div class="text-center font-label-mono text-on-surface-variant pb-2">1</div>
+<div class="text-center font-label-mono text-on-surface-variant pb-2">2</div>
+<div class="text-center font-label-mono text-on-surface-variant pb-2">3</div>
+<div class="text-center font-label-mono text-on-surface-variant pb-2">4</div>
+<div class="text-center font-label-mono text-on-surface-variant pb-2">5</div>
+<!-- Rows (Home Goals) -->
+<!-- Row 0 -->
+<div class="flex items-center justify-end pr-4 font-label-mono text-primary-container">
+<span class="text-[10px] absolute -ml-16 mt-4">HOME (0-5)</span>
+                                    0
+                                </div>
+<div class="bg-primary-container/60 h-14 rounded flex flex-col items-center justify-center border border-primary-container/20">
+<span class="font-body-bold text-on-surface">8.17%</span><span class="text-[9px] text-on-surface/50 font-label-mono">0-0</span>
+</div>
+<div class="bg-primary-container/70 h-14 rounded flex flex-col items-center justify-center border border-primary-container/20">
+<span class="font-body-bold text-on-surface">9.65%</span><span class="text-[9px] text-on-surface/50 font-label-mono">0-1</span>
+</div>
+<div class="bg-primary-container/40 h-14 rounded flex flex-col items-center justify-center border border-primary-container/20">
+<span class="font-body-bold text-on-surface">5.69%</span><span class="text-[9px] text-on-surface/50 font-label-mono">0-2</span>
+</div>
+<div class="bg-primary-container/20 h-14 rounded flex flex-col items-center justify-center border border-primary-container/20">
+<span class="font-body-bold text-on-surface">2.24%</span><span class="text-[9px] text-on-surface/50 font-label-mono">0-3</span>
+</div>
+<div class="bg-surface-dim h-14 rounded flex flex-col items-center justify-center border border-outline-variant">
+<span class="font-body-bold text-on-surface">0.66%</span><span class="text-[9px] text-on-surface-variant font-label-mono">0-4</span>
+</div>
+<div class="bg-surface-dim h-14 rounded flex flex-col items-center justify-center border border-outline-variant">
+<span class="font-body-bold text-on-surface">0.16%</span><span class="text-[9px] text-on-surface-variant font-label-mono">0-5</span>
+</div>
+<!-- Row 1 -->
+<div class="flex items-center justify-end pr-4 font-label-mono text-on-surface-variant">1</div>
+<div class="bg-primary-container/80 h-14 rounded flex flex-col items-center justify-center border border-primary-container/20">
+<span class="font-body-bold text-on-surface">10.82%</span><span class="text-[9px] text-on-surface/50 font-label-mono">1-0</span>
+</div>
+<div class="bg-primary-container h-14 rounded flex flex-col items-center justify-center border-2 neon-border neon-glow relative">
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-secondary-fixed rounded-full animate-pulse"></span>
+<span class="font-body-bold text-[#000000]">12.77%</span><span class="text-[9px] text-[#000000]/70 font-label-mono">1-1</span>
+</div>
+<div class="bg-primary-container/50 h-14 rounded flex flex-col items-center justify-center border border-primary-container/20">
+<span class="font-body-bold text-on-surface">7.54%</span><span class="text-[9px] text-on-surface/50 font-label-mono">1-2</span>
+</div>
+<div class="bg-primary-container/20 h-14 rounded flex flex-col items-center justify-center border border-primary-container/20">
+<span class="font-body-bold text-on-surface">2.96%</span><span class="text-[9px] text-on-surface/50 font-label-mono">1-3</span>
+</div>
+<div class="bg-surface-dim h-14 rounded flex flex-col items-center justify-center border border-outline-variant">
+<span class="font-body-bold text-on-surface">0.87%</span><span class="text-[9px] text-on-surface-variant font-label-mono">1-4</span>
+</div>
+<div class="bg-surface-dim h-14 rounded flex flex-col items-center justify-center border border-outline-variant">
+<span class="font-body-bold text-on-surface">0.21%</span><span class="text-[9px] text-on-surface-variant font-label-mono">1-5</span>
+</div>
+<!-- Row 2 -->
+<div class="flex items-center justify-end pr-4 font-label-mono text-on-surface-variant">2</div>
+<div class="bg-primary-container/50 h-14 rounded flex flex-col items-center justify-center border border-primary-container/20">
+<span class="font-body-bold text-on-surface">7.17%</span><span class="text-[9px] text-on-surface/50 font-label-mono">2-0</span>
+</div>
+<div class="bg-primary-container/60 h-14 rounded flex flex-col items-center justify-center border border-primary-container/20">
+<span class="font-body-bold text-on-surface">8.46%</span><span class="text-[9px] text-on-surface/50 font-label-mono">2-1</span>
+</div>
+<div class="bg-primary-container/30 h-14 rounded flex flex-col items-center justify-center border border-primary-container/20">
+<span class="font-body-bold text-on-surface">4.99%</span><span class="text-[9px] text-on-surface/50 font-label-mono">2-2</span>
+</div>
+<div class="bg-primary-container/10 h-14 rounded flex flex-col items-center justify-center border border-primary-container/20">
+<span class="font-body-bold text-on-surface">1.96%</span><span class="text-[9px] text-on-surface/50 font-label-mono">2-3</span>
+</div>
+<div class="bg-surface-dim h-14 rounded flex flex-col items-center justify-center border border-outline-variant">
+<span class="font-body-bold text-on-surface">0.58%</span><span class="text-[9px] text-on-surface-variant font-label-mono">2-4</span>
+</div>
+<div class="bg-surface-dim h-14 rounded flex flex-col items-center justify-center border border-outline-variant">
+<span class="font-body-bold text-on-surface">0.14%</span><span class="text-[9px] text-on-surface-variant font-label-mono">2-5</span>
+</div>
+<!-- Keep generating rows 3,4,5 with diminishing colors -->
+<!-- Row 3 -->
+<div class="flex items-center justify-end pr-4 font-label-mono text-on-surface-variant">3</div>
+<div class="bg-primary-container/20 h-14 rounded flex flex-col items-center justify-center border border-primary-container/20">
+<span class="font-body-bold text-on-surface">3.16%</span><span class="text-[9px] text-on-surface/50 font-label-mono">3-0</span>
+</div>
+<div class="bg-primary-container/30 h-14 rounded flex flex-col items-center justify-center border border-primary-container/20">
+<span class="font-body-bold text-on-surface">3.73%</span><span class="text-[9px] text-on-surface/50 font-label-mono">3-1</span>
+</div>
+<div class="bg-primary-container/10 h-14 rounded flex flex-col items-center justify-center border border-primary-container/20">
+<span class="font-body-bold text-on-surface">2.20%</span><span class="text-[9px] text-on-surface/50 font-label-mono">3-2</span>
+</div>
+<div class="bg-surface-dim h-14 rounded flex flex-col items-center justify-center border border-outline-variant">
+<span class="font-body-bold text-on-surface">0.87%</span><span class="text-[9px] text-on-surface-variant font-label-mono">3-3</span>
+</div>
+<div class="bg-surface-dim h-14 rounded flex flex-col items-center justify-center border border-outline-variant">
+<span class="font-body-bold text-on-surface">0.26%</span><span class="text-[9px] text-on-surface-variant font-label-mono">3-4</span>
+</div>
+<div class="bg-surface-dim h-14 rounded flex flex-col items-center justify-center border border-outline-variant">
+<span class="font-body-bold text-on-surface">0.06%</span><span class="text-[9px] text-on-surface-variant font-label-mono">3-5</span>
+</div>
+</div>
+</div>
+<div class="mt-6 flex items-start gap-2 text-xs text-on-surface-variant border-t border-outline-variant pt-4">
+<span class="material-symbols-outlined text-[14px]">info</span>
+<p>Hover over matrix cells to inspect deep probability indicators for specific scores. Scores exceeding 5 goals have negligible probability and are suppressed to minimize noise.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
